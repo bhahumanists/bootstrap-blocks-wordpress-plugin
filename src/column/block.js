@@ -44,6 +44,7 @@ registerBlockType( 'wp-bootstrap-blocks/column', {
 			bgColor,
 			padding,
 			centerContent,
+			verticalCenter,
 		} = attributes;
 
 		// Prepare styles for selected background-color
@@ -88,6 +89,7 @@ registerBlockType( 'wp-bootstrap-blocks/column', {
 			'data-bg-color': bgColor,
 			'data-padding': padding,
 			'data-center-content': centerContent,
+			'data-vertical-center': verticalCenter,
 			style,
 		};
 	},

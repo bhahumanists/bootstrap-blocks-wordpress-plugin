@@ -664,7 +664,8 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('wp-
         equalWidthXs = attributes.equalWidthXs,
         bgColor = attributes.bgColor,
         padding = attributes.padding,
-        centerContent = attributes.centerContent; // Prepare styles for selected background-color
+        centerContent = attributes.centerContent,
+        verticalCenter = attributes.verticalCenter; // Prepare styles for selected background-color
 
     var style = {};
 
@@ -690,6 +691,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('wp-
       'data-bg-color': bgColor,
       'data-padding': padding,
       'data-center-content': centerContent,
+      'data-vertical-center': verticalCenter,
       style: style
     };
   },
@@ -1006,6 +1008,17 @@ var BootstrapColumnEdit = /*#__PURE__*/function (_Component) {
         onChange: function onChange(value) {
           setAttributes({
             padding: value
+          });
+        }
+      })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["PanelBody"], {
+        title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Vertical align (inside column)', 'wp-bootstrap-blocks'),
+        initialOpen: false
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__["ToggleControl"], {
+        label: "Vertically centre content?",
+        checked: attributes.verticalCenter,
+        onChange: function onChange() {
+          return setAttributes({
+            verticalCenter: !attributes.verticalCenter
           });
         }
       }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__["createElement"])("div", {

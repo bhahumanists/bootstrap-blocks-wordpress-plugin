@@ -189,4 +189,11 @@ body:not(.branch-5-2):not(.branch-5-3) [data-type="wp-bootstrap-blocks/row"]:not
 		}
 	}
 
+	// Humanists UK: add vertical centering so it's visible in editor
+	&[data-vertical-center="true"] > .wp-block-wp-bootstrap-blocks-column {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+
 }

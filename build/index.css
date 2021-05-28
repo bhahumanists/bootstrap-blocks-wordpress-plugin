@@ -655,5 +655,10 @@
 [data-type="wp-bootstrap-blocks/column"][data-padding=p-9] > .wp-block-wp-bootstrap-blocks-column {
   padding: 12rem;
 }
+[data-type="wp-bootstrap-blocks/column"][data-vertical-center=true] > .wp-block-wp-bootstrap-blocks-column {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
 
 /*# sourceMappingURL=index.css.map*/

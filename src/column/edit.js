@@ -2,6 +2,7 @@
 import { __ } from '@wordpress/i18n';
 import {
 	CheckboxControl,
+	ToggleControl,
 	ColorPalette,
 	PanelBody,
 	RangeControl,
@@ -305,6 +306,19 @@ class BootstrapColumnEdit extends Component {
 									padding: value,
 								} );
 							} }
+						/>
+					</PanelBody>
+					<PanelBody
+						title={ __(
+							'Vertical align (inside column)',
+							'wp-bootstrap-blocks'
+						) }
+						initialOpen={ false }
+					>
+						<ToggleControl
+							label="Vertically centre content?"
+							checked={ attributes.verticalCenter }
+							onChange={() => setAttributes({verticalCenter: !attributes.verticalCenter})}
 						/>
 					</PanelBody>
 				</InspectorControls>

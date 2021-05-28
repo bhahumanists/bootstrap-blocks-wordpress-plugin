@@ -30,6 +30,7 @@
  *   'bgColor' (string) => Name of background color (eg. 'primary').
  *   'padding' (string) => Padding inside of column (eg. 'p-3').
  *   'centerContent' (boolean) => If true content should be centered in column (only needed if bgColor is set).
+ *   'verticalCenter' (boolean) => If true content should be vertically centered in column
  *   'className' (string) => Additional class names which should be added to block.
  * )
  */
@@ -91,6 +92,11 @@ if ( array_key_exists( 'bgColor', $attributes ) && ! empty( $attributes['bgColor
 		array_push( $column_content_classes, 'flex-column' );
 		array_push( $column_content_classes, 'justify-content-center' );
 	}
+}
+
+if ( array_key_exists( 'verticalCenter', $attributes ) && $attributes['verticalCenter'] ) {
+	array_push( $classes, 'd-flex' );
+	array_push( $classes, 'align-items-center' );
 }
 
 if ( array_key_exists( 'padding', $attributes ) && ! empty( $attributes['padding'] ) ) {
