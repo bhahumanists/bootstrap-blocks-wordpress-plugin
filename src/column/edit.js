@@ -17,7 +17,6 @@ import * as BlockEditor from '@wordpress/block-editor';
 import * as Editor from '@wordpress/editor';
 
 import { isBootstrap5Active } from '../helper';
-import Edit from "../../../humanistsuk-gutenberg-blocks/src/button/edit";
 
 const { InnerBlocks, InspectorControls } = BlockEditor || Editor; // Fallback to deprecated '@wordpress/editor' for backwards compatibility
 
