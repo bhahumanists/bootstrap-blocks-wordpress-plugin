@@ -804,14 +804,32 @@ var paddingOptions = [{
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('None', 'wp-bootstrap-blocks'),
   value: ''
 }, {
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Small', 'wp-bootstrap-blocks'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('1', 'wp-bootstrap-blocks'),
+  value: 'p-1'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('2', 'wp-bootstrap-blocks'),
   value: 'p-2'
 }, {
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Medium', 'wp-bootstrap-blocks'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('3', 'wp-bootstrap-blocks'),
   value: 'p-3'
 }, {
-  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Large', 'wp-bootstrap-blocks'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('4', 'wp-bootstrap-blocks'),
+  value: 'p-4'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('5', 'wp-bootstrap-blocks'),
   value: 'p-5'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('6', 'wp-bootstrap-blocks'),
+  value: 'p-6'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('7', 'wp-bootstrap-blocks'),
+  value: 'p-7'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('8', 'wp-bootstrap-blocks'),
+  value: 'p-8'
+}, {
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('9', 'wp-bootstrap-blocks'),
+  value: 'p-9'
 }];
 paddingOptions = Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_13__["applyFilters"])('wpBootstrapBlocks.column.paddingOptions', paddingOptions);
 

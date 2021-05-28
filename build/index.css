@@ -625,5 +625,35 @@
   flex-direction: column;
   justify-content: center;
 }
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-0] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 0;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-1] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 0.25rem;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-2] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 0.5rem;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-3] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 1rem;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-4] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 1.5rem;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-5] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 3rem;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-6] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 5rem;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-7] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 7rem;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-8] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 9rem;
+}
+[data-type="wp-bootstrap-blocks/column"][data-padding=p-9] > .wp-block-wp-bootstrap-blocks-column {
+  padding: 12rem;
+}
 
 /*# sourceMappingURL=index.css.map*/

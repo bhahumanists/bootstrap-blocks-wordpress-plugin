@@ -166,4 +166,27 @@ body:not(.branch-5-2):not(.branch-5-3) [data-type="wp-bootstrap-blocks/row"]:not
 		flex-direction: column;
 		justify-content: center;
 	}
+
+	// Humanists UK: add column padding CSS so it's visible in editor
+	// Define extra spacers: this should match our overridden values in humanistsuk2021.scss
+	$spacer: 1rem;
+	$spacers: (
+		0: 0,
+		1: $spacer / 4,
+		2: $spacer / 2,
+		3: $spacer,
+		4: $spacer * 1.5,
+		5: $spacer * 3,
+		6: $spacer * 5,
+		7: $spacer * 7,
+		8: $spacer * 9,
+		9: $spacer * 12,
+	);
+
+	@each $level, $space in $spacers {
+		&[data-padding="p-#{$level}"] > .wp-block-wp-bootstrap-blocks-column {
+			padding: $space;
+		}
+	}
+
 }

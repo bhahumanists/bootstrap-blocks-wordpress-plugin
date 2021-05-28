@@ -54,9 +54,15 @@ bgColorOptions = applyFilters(
 
 let paddingOptions = [
 	{ label: __( 'None', 'wp-bootstrap-blocks' ), value: '' },
-	{ label: __( 'Small', 'wp-bootstrap-blocks' ), value: 'p-2' },
-	{ label: __( 'Medium', 'wp-bootstrap-blocks' ), value: 'p-3' },
-	{ label: __( 'Large', 'wp-bootstrap-blocks' ), value: 'p-5' },
+	{ label: __( '1', 'wp-bootstrap-blocks' ), value: 'p-1' },
+	{ label: __( '2', 'wp-bootstrap-blocks' ), value: 'p-2' },
+	{ label: __( '3', 'wp-bootstrap-blocks' ), value: 'p-3' },
+	{ label: __( '4', 'wp-bootstrap-blocks' ), value: 'p-4' },
+	{ label: __( '5', 'wp-bootstrap-blocks' ), value: 'p-5' },
+	{ label: __( '6', 'wp-bootstrap-blocks' ), value: 'p-6' },
+	{ label: __( '7', 'wp-bootstrap-blocks' ), value: 'p-7' },
+	{ label: __( '8', 'wp-bootstrap-blocks' ), value: 'p-8' },
+	{ label: __( '9', 'wp-bootstrap-blocks' ), value: 'p-9' },
 ];
 
 paddingOptions = applyFilters(
