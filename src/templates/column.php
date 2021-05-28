@@ -84,8 +84,7 @@ if ( array_key_exists( 'className', $attributes ) && ! empty( $attributes['class
 }
 
 if ( array_key_exists( 'bgColor', $attributes ) && ! empty( $attributes['bgColor'] ) ) {
-	array_push( $column_content_classes, 'h-100' );
-	array_push( $column_content_classes, 'bg-' . $attributes['bgColor'] );
+	array_push( $classes, 'bg-' . $attributes['bgColor'] );
 
 	if ( array_key_exists( 'centerContent', $attributes ) && $attributes['centerContent'] ) {
 		array_push( $column_content_classes, 'd-flex' );

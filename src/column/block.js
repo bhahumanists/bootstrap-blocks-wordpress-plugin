@@ -10,6 +10,8 @@ import * as Editor from '@wordpress/editor';
 
 import edit, { bgColorOptions } from './edit';
 import { column } from '../icons';
+import { select } from '@wordpress/data';
+import { getColorObjectByAttributeValues } from "@wordpress/block-editor";
 
 const { InnerBlocks } = BlockEditor || Editor; // Fallback to deprecated '@wordpress/editor' for backwards compatibility
 
@@ -48,14 +50,17 @@ registerBlockType( 'wp-bootstrap-blocks/column', {
 		} = attributes;
 
 		// Prepare styles for selected background-color
+		// Humanists UK Edit: get pallette colours from editor settings
 		let style = {};
 		if ( bgColor ) {
-			const selectedBgColor = bgColorOptions.find(
-				( bgColorOption ) => bgColorOption.name === bgColor
+			const settings = select( 'core/editor' ).getEditorSettings();
+			const colorObject = getColorObjectByAttributeValues(
+				settings.colors,
+				bgColor
 			);
-			if ( selectedBgColor ) {
+			if ( colorObject ) {
 				style = {
-					backgroundColor: selectedBgColor.color,
+					backgroundColor: colorObject.color,
 				};
 			}
 		}

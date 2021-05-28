@@ -12,11 +12,12 @@ import { Component, Fragment } from '@wordpress/element';
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { applyFilters } from '@wordpress/hooks';
-
+import { withColors, PanelColorSettings } from "@wordpress/block-editor"; //not sure why * doesn't get it
 import * as BlockEditor from '@wordpress/block-editor';
 import * as Editor from '@wordpress/editor';
 
 import { isBootstrap5Active } from '../helper';
+import Edit from "../../../humanistsuk-gutenberg-blocks/src/button/edit";
 
 const { InnerBlocks, InspectorControls } = BlockEditor || Editor; // Fallback to deprecated '@wordpress/editor' for backwards compatibility
 
@@ -43,16 +44,6 @@ const ColumnSizeRangeControl = ( {
 	);
 };
 
-export let bgColorOptions = [
-	{ name: 'primary', color: '#007bff' },
-	{ name: 'secondary', color: '#6c757d' },
-];
-
-bgColorOptions = applyFilters(
-	'wpBootstrapBlocks.column.bgColorOptions',
-	bgColorOptions
-);
-
 let paddingOptions = [
 	{ label: __( 'None', 'wp-bootstrap-blocks' ), value: '' },
 	{ label: __( '1', 'wp-bootstrap-blocks' ), value: 'p-1' },
@@ -78,6 +69,8 @@ class BootstrapColumnEdit extends Component {
 			className,
 			setAttributes,
 			hasChildBlocks,
+			bgColor,
+			setBgColor,
 		} = this.props;
 		const {
 			sizeXxl,
@@ -92,7 +85,7 @@ class BootstrapColumnEdit extends Component {
 			equalWidthMd,
 			equalWidthSm,
 			equalWidthXs,
-			bgColor,
+			//bgColor,
 			padding,
 			centerContent,
 		} = attributes;
@@ -248,47 +241,58 @@ class BootstrapColumnEdit extends Component {
 						) }
 						initialOpen={ false }
 					>
-						<ColorPalette
-							colors={ bgColorOptions }
-							value={ bgColor }
-							onChange={ ( value ) => {
-								// Value is undefined if color gets cleared
-								if ( ! value ) {
-									setAttributes( {
-										bgColor: '',
-										centerContent: false,
-									} );
-								} else {
-									const selectedColor = bgColorOptions.find(
-										( c ) => c.color === value
-									);
-									if ( selectedColor ) {
-										setAttributes( {
-											bgColor: selectedColor.name,
-										} );
-									}
+						<PanelColorSettings
+							title='Button Colour Options'
+							colorSettings={[
+								{
+									value: bgColor.color,
+									onChange: setBgColor,
+									label: 'Background Colour'
 								}
-							} }
+							] }
 							disableCustomColors
 						/>
-						{ bgColor ? (
-							<CheckboxControl
-								label={ __(
-									'Center content vertically in row',
-									'wp-bootstrap-blocks'
-								) }
-								checked={ centerContent }
-								onChange={ ( isChecked ) =>
-									setAttributes( {
-										centerContent: isChecked,
-									} )
-								}
-								help={ __(
-									'This setting only applies if there is no vertical alignment set on the parent row block.',
-									'wp-bootstrap-blocks'
-								) }
-							/>
-						) : null }
+						{/*<ColorPalette*/}
+						{/*	colors={ bgColorOptions }*/}
+						{/*	value={ bgColor }*/}
+						{/*	onChange={ ( value ) => {*/}
+						{/*		// Value is undefined if color gets cleared*/}
+						{/*		if ( ! value ) {*/}
+						{/*			setAttributes( {*/}
+						{/*				bgColor: '',*/}
+						{/*				centerContent: false,*/}
+						{/*			} );*/}
+						{/*		} else {*/}
+						{/*			const selectedColor = bgColorOptions.find(*/}
+						{/*				( c ) => c.color === value*/}
+						{/*			);*/}
+						{/*			if ( selectedColor ) {*/}
+						{/*				setAttributes( {*/}
+						{/*					bgColor: selectedColor.name,*/}
+						{/*				} );*/}
+						{/*			}*/}
+						{/*		}*/}
+						{/*	} }*/}
+						{/*	disableCustomColors*/}
+						{/*/>*/}
+						{/*{ bgColor ? (*/}
+						{/*	<CheckboxControl*/}
+						{/*		label={ __(*/}
+						{/*			'Center content vertically in row',*/}
+						{/*			'wp-bootstrap-blocks'*/}
+						{/*		) }*/}
+						{/*		checked={ centerContent }*/}
+						{/*		onChange={ ( isChecked ) =>*/}
+						{/*			setAttributes( {*/}
+						{/*				centerContent: isChecked,*/}
+						{/*			} )*/}
+						{/*		}*/}
+						{/*		help={ __(*/}
+						{/*			'This setting only applies if there is no vertical alignment set on the parent row block.',*/}
+						{/*			'wp-bootstrap-blocks'*/}
+						{/*		) }*/}
+						{/*	/>*/}
+						{/*) : null }*/}
 					</PanelBody>
 					<PanelBody
 						title={ __(
@@ -337,7 +341,9 @@ class BootstrapColumnEdit extends Component {
 	}
 }
 
+
 export default compose(
+	withColors({bgColor: 'color'}),
 	withSelect( ( select, ownProps ) => {
 		const { clientId } = ownProps;
 		const { getBlockOrder } =
