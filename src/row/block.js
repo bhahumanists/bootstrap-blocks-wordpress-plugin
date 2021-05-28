@@ -37,6 +37,7 @@ registerBlockType( 'wp-bootstrap-blocks/row', {
 			'data-alignment': attributes.alignment,
 			'data-vertical-alignment': attributes.verticalAlignment,
 			'data-editor-stack-columns': attributes.editorStackColumns,
+			'data-no-gutters': attributes.noGutters,
 		};
 	},
 

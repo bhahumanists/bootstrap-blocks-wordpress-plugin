@@ -1569,7 +1569,8 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["registerBlockType"])('wp-
     return {
       'data-alignment': attributes.alignment,
       'data-vertical-alignment': attributes.verticalAlignment,
-      'data-editor-stack-columns': attributes.editorStackColumns
+      'data-editor-stack-columns': attributes.editorStackColumns,
+      'data-no-gutters': attributes.noGutters
     };
   },
   edit: _edit__WEBPACK_IMPORTED_MODULE_5__["default"],
