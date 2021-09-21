@@ -96,7 +96,7 @@ if ( array_key_exists( 'bgColor', $attributes ) && ! empty( $attributes['bgColor
 if ( array_key_exists( 'verticalCenter', $attributes ) && $attributes['verticalCenter'] ) {
 	array_push( $classes, 'd-flex' );
 	array_push( $classes, 'flex-column' );
-	array_push( $classes, 'align-items-center' );
+	array_push( $classes, 'justify-content-center' );
 }
 
 if ( array_key_exists( 'padding', $attributes ) && ! empty( $attributes['padding'] ) ) {
