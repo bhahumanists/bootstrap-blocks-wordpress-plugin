@@ -16,6 +16,8 @@ import { getColorObjectByAttributeValues } from "@wordpress/block-editor";
 const { InnerBlocks } = BlockEditor || Editor; // Fallback to deprecated '@wordpress/editor' for backwards compatibility
 
 registerBlockType( 'wp-bootstrap-blocks/column', {
+	apiVersion: 3,
+	editorStyle: 'wp-bootstrap-blocks-editor-styles', // Required for CSS to load inside iframe in WP 6.8+
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Column', 'wp-bootstrap-blocks' ), // Block title.
 	icon: column, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.

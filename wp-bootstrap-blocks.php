@@ -1,13 +1,14 @@
 <?php
 /**
- * Plugin Name: Bootstrap Blocks
+ * Plugin Name: Bootstrap Blocks (edited by Humanists UK)
  * Plugin URI: https://github.com/liip/bootstrap-blocks-wordpress-plugin
- * Description: Bootstrap Gutenberg Blocks for WordPress.
+ * Description: Bootstrap Gutenberg Blocks for WordPress (edited by Humanists UK).
  * Author: Liip AG
  * Author URI: https://liip.ch
  * Version: 3.1.3
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
+ * Update URI: false
  * Text Domain: wp-bootstrap-blocks
  * Domain Path: /languages/
  *

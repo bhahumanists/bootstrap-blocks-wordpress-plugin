@@ -33,7 +33,7 @@ class WP_Bootstrap_Blocks {
 	 *
 	 * @var string
 	 */
-	public static $version = '3.1.3';
+	public static $version = '3.1.5';
 
 	/**
 	 * The plugin token.
@@ -160,6 +160,17 @@ class WP_Bootstrap_Blocks {
 			array(),
 			self::$version
 		);
+
+		// Editor styles - must be on enqueue_block_assets hook (not enqueue_block_editor_assets)
+		// to load inside the iframe in WordPress 6.3+ with apiVersion 3 blocks
+		if ( is_admin() ) {
+			wp_enqueue_style(
+				$this->token . '-editor-styles', // Handle.
+				esc_url( $this->assets_url ) . 'index.css', // Block editor CSS.
+				array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
+				self::$version
+			);
+		}
 	}
 
 	/**
@@ -205,13 +216,7 @@ class WP_Bootstrap_Blocks {
 			)
 		);
 
-		// Styles.
-		wp_enqueue_style(
-			$this->token . '-editor-styles', // Handle.
-			esc_url( $this->assets_url ) . 'index.css', // Block editor CSS.
-			array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-			self::$version
-		);
+		// Note: Editor CSS is now enqueued in enqueue_block_assets() to work inside iframe
 	}
 
 	/**

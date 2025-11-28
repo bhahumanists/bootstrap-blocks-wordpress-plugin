@@ -16,6 +16,8 @@ import './style.scss';
 const { InnerBlocks } = BlockEditor || Editor; // Fallback to deprecated '@wordpress/editor' for backwards compatibility
 
 registerBlockType( 'wp-bootstrap-blocks/row', {
+	apiVersion: 3,
+	editorStyle: 'wp-bootstrap-blocks-editor-styles', // Required for CSS to load inside iframe in WP 6.8+
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Row', 'wp-bootstrap-blocks' ), // Block title.
 	icon: columns, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.

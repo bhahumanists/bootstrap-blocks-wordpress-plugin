@@ -1,5 +1,28 @@
 @import "../assets/gutenberg";
 
+// Grid mixin for apiVersion 3: targets inner element's data attributes using :has()
+// This allows styling the outer flex item based on data attributes on the inner wrapper
+@mixin make-grid-columns-v3($current-size-index: 1, $sizes: ("xxl", "xl", "lg", "md", "sm", "xs"), $grid-columns: 12) {
+	@if $current-size-index <= length($sizes) {
+		$size: nth($sizes, $current-size-index);
+
+		@for $i from 1 through $grid-columns {
+			&:has(> .wp-block-wp-bootstrap-blocks-column[data-size-#{$size}="#{$i}"]) {
+				flex: 0 0 percentage($i / $grid-columns);
+				max-width: percentage($i / $grid-columns);
+			}
+		}
+		&:has(> .wp-block-wp-bootstrap-blocks-column[data-size-#{$size}="0"]) {
+			@include make-grid-columns-v3($current-size-index + 1);
+		}
+	}
+	@else {
+		flex-grow: 1;
+		flex-basis: 0;
+	}
+}
+
+// Legacy mixin for blocks that still use getEditWrapperProps (apiVersion 1-2)
 @mixin make-grid-columns($current-size-index: 1, $sizes: ("xxl", "xl", "lg", "md", "sm", "xs"), $grid-columns: 12) {
 	@if $current-size-index <= length($sizes) {
 		$size: nth($sizes, $current-size-index);
@@ -32,8 +55,13 @@
 	}
 
 	@include break-small() {
+		// apiVersion 3: row wrapper is MERGED with data-type element (same element)
+		// apiVersion 1-2: row wrapper is a DESCENDANT of data-type element
 		&:not([data-editor-stack-columns="true"]) {
-			.wp-block-wp-bootstrap-blocks-row {
+			// apiVersion 3: merged element - use & to target same element
+			&.wp-block-wp-bootstrap-blocks-row,
+			// Legacy: nested structure - descendant selector
+			.wp-block-wp-bootstrap-blocks-row:not([data-editor-stack-columns="true"]) {
 				> .block-editor-inner-blocks > .block-editor-block-list__layout,
 				> .editor-inner-blocks > .editor-block-list__layout {
 					display: flex;
@@ -42,7 +70,8 @@
 					> [data-type="wp-bootstrap-blocks/column"] {
 						margin: 0;
 
-						// Grid implementation
+						// Grid implementation - the legacy mixin works for apiVersion 3 too
+						// because data attributes are on the same element as data-type
 						@include make-grid-columns();
 
 						// Prevent long unbroken words from overflowing.
@@ -58,28 +87,42 @@
 			}
 
 			// Horizontal alignment
+			// apiVersion 3: merged element (data-type + wp-block class on same element)
+			&[data-alignment="left"].wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
+			&[data-alignment="left"].wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout,
+			// Legacy: nested structure
 			&[data-alignment="left"] .wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
 			&[data-alignment="left"] .wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout {
 				justify-content: flex-start;
 			}
+			&[data-alignment="center"].wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
+			&[data-alignment="center"].wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout,
 			&[data-alignment="center"] .wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
 			&[data-alignment="center"] .wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout {
 				justify-content: center;
 			}
+			&[data-alignment="right"].wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
+			&[data-alignment="right"].wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout,
 			&[data-alignment="right"] .wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
 			&[data-alignment="right"] .wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout {
 				justify-content: flex-end;
 			}
 
 			// Vertical alignment
+			&[data-vertical-alignment="top"].wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
+			&[data-vertical-alignment="top"].wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout,
 			&[data-vertical-alignment="top"] .wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
 			&[data-vertical-alignment="top"] .wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout {
 				align-items: start;
 			}
+			&[data-vertical-alignment="center"].wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
+			&[data-vertical-alignment="center"].wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout,
 			&[data-vertical-alignment="center"] .wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
 			&[data-vertical-alignment="center"] .wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout {
 				align-items: center;
 			}
+			&[data-vertical-alignment="bottom"].wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
+			&[data-vertical-alignment="bottom"].wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout,
 			&[data-vertical-alignment="bottom"] .wp-block-wp-bootstrap-blocks-row > .block-editor-inner-blocks > .block-editor-block-list__layout,
 			&[data-vertical-alignment="bottom"] .wp-block-wp-bootstrap-blocks-row > .editor-inner-blocks > .editor-block-list__layout {
 				align-items: flex-end;
@@ -103,6 +146,18 @@
 }
 
 // Fix column padding in WordPress >= 5.4 (block-editor-xy classes only exist in WordPress >= 5.2)
+// apiVersion 3: merged element (data-type + wp-block class on same element)
+body:not(.branch-5-2):not(.branch-5-3) [data-type="wp-bootstrap-blocks/row"]:not([data-editor-stack-columns="true"]):not([data-no-gutters="true"]).wp-block-wp-bootstrap-blocks-row {
+	@include break-small() {
+		> .block-editor-inner-blocks > .block-editor-block-list__layout {
+			> [data-type="wp-bootstrap-blocks/column"] {
+				padding-left: $block-padding;
+				padding-right: $block-padding;
+			}
+		}
+	}
+}
+// Legacy: nested structure
 body:not(.branch-5-2):not(.branch-5-3) [data-type="wp-bootstrap-blocks/row"]:not([data-editor-stack-columns="true"]):not([data-no-gutters="true"]) .wp-block-wp-bootstrap-blocks-row {
 	@include break-small() {
 		> .block-editor-inner-blocks > .block-editor-block-list__layout {
@@ -161,7 +216,14 @@ body:not(.branch-5-2):not(.branch-5-3) [data-type="wp-bootstrap-blocks/row"]:not
 		outline: 1px dashed $gray-600;
 	}
 
+	// Legacy: data-center-content on outer wrapper
 	&[data-center-content="true"] {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	// Modern: data-center-content on inner wrapper (apiVersion 3)
+	&:has(> .wp-block-wp-bootstrap-blocks-column[data-center-content="true"]) {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -188,14 +250,28 @@ body:not(.branch-5-2):not(.branch-5-3) [data-type="wp-bootstrap-blocks/row"]:not
 		9: $spacer * 12,
 	);
 
+	// Legacy: data-padding on outer wrapper
 	@each $level, $space in $spacers {
 		&[data-padding="p-#{$level}"] > .wp-block-wp-bootstrap-blocks-column {
 			padding: $space;
 		}
 	}
+	// Modern: data-padding on inner wrapper (apiVersion 3)
+	@each $level, $space in $spacers {
+		> .wp-block-wp-bootstrap-blocks-column[data-padding="p-#{$level}"] {
+			padding: $space;
+		}
+	}
 
 	// Humanists UK: add vertical centering so it's visible in editor
+	// Legacy: data-vertical-center on outer wrapper
 	&[data-vertical-center="true"] > .wp-block-wp-bootstrap-blocks-column {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+	// Modern: data-vertical-center on inner wrapper (apiVersion 3)
+	> .wp-block-wp-bootstrap-blocks-column[data-vertical-center="true"] {
 		height: 100%;
 		display: flex;
 		align-items: center;
